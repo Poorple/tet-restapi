@@ -59,7 +59,7 @@ app.put('/component/:id', (req, res) => {
 // DELETE: Remove a user by ID
 app.delete('/component/:id', (req, res) => {
     const userIndex = info.findIndex(u => u.id === parseInt(req.params.id));
-    if (userIndex === -1 || 0) return res.status(404).send('User not found');
+    if (userIndex === -1 ) return res.status(404).send('User not found');
 
     info.splice(userIndex, 1);
     res.send('User deleted');
