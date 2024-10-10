@@ -12,19 +12,19 @@ app.listen(PORT, () => {
 
 let info =[];
 
-// READ: Get all users
+// READ: Get all components
 app.get('/component', (req, res) => {
     res.json(info);
 });
 
-// READ: Get a single user by ID
+// READ: Get a single component by ID
 app.get('/component/:id', (req, res) => {
     const component = info.find(u => u.id === parseInt(req.params.id));
     if (!component) return res.status(404).send('component not found');
     res.json(component);
 });
 
-// CREATE: Add a new user
+// CREATE: Add a new components
 app.post('/component', (req, res) => {
     const { id, title, node_id, parent_node_id, ordering, childObjs } = req.body;
 
@@ -41,26 +41,26 @@ app.post('/component', (req, res) => {
     res.status(201).json(newComponent);
 });
 
-// UPDATE: Update a user by ID
+// UPDATE: Update a component by ID
 app.put('/component/:id', (req, res) => {
-     const user = info.find(u => u.id === parseInt(req.params.id));
-    if (!user) return res.status(404).send('Component not found');
+     const component = info.find(u => u.id === parseInt(req.params.id));
+    if (!component) return res.status(404).send('Component not found');
 
     // Update the correct fields
-    user.title = req.body.title;
-    user.node_id = req.body.node_id;
-    user.parent_node_id = req.body.parent_node_id;
-    user.ordering = req.body.ordering;
-    user.childObjs = req.body.childObjs;
+    component.title = req.body.title;
+    component.node_id = req.body.node_id;
+    component.parent_node_id = req.body.parent_node_id;
+    component.ordering = req.body.ordering;
+    component.childObjs = req.body.childObjs;
 
-    res.json(user);
+    res.json(component);
 });
 
-// DELETE: Remove a user by ID
+// DELETE: Remove a component by ID
 app.delete('/component/:id', (req, res) => {
-    const userIndex = info.findIndex(u => u.id === parseInt(req.params.id));
-    if (userIndex === -1 ) return res.status(404).send('User not found');
+    const componentIndex = info.findIndex(u => u.id === parseInt(req.params.id));
+    if (componentIndex === -1 ) return res.status(404).send('Component not found');
 
-    info.splice(userIndex, 1);
-    res.send('User deleted');
+    info.splice(componentIndex, 1);
+    res.send('Component deleted');
 });
